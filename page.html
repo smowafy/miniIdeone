@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+	<script>
+	var escapeChars = function(str) {
+		var result = "";
+		if (str == undefined) return "";
+		for(var i = 0; i < str.length; i++) {
+			if (str[i] == '\n') {
+				result += '\\n';
+			}
+			else if (str[i] == '\"') {
+				result += '\\\"';
+			} else {
+				result += str[i];
+			}
+		}
+		return result;
+	}
+	var replaceNewLines = function(str) {
+		var result = "";
+		if (str == undefined) return "";
+		for(var i = 0; i < str.length; i++) {
+			if (str[i] == '\n') {
+				result += "<br />";
+			} else {
+				result += str[i];
+			}
+		}
+		return result;
+	}
+		$(document).ready(function(){
+			$("#button").click(function() {
+				console.log("clicked");
+				console.log($("#codearea").val());
+				console.log("{\"code\" : \"" + escapeChars($('#codearea').val()) + "\",");
+				console.log("\"inputstdin\" : \"" + escapeChars($('#inputarea').val()) + "\"}");
+				$.ajax({
+					url : 'http://localhost:3260/submit',
+					type : 'POST',
+					dataType : 'json',
+					crossDomain : true,
+					data : { code :  escapeChars($('#codearea').val()),
+						inputstdin : escapeChars($('#inputarea').val())
+					},
+					success : function(result) {
+						console.log(result);
+						$('#paragraphOutput').html(result.outputCode.replace(/\n/g, "<br />"));
+						$('#paragraphStderr').html(result.stderr.replace(/\n/g, "<br />"));
+					},
+					error: function(xhr, resp, text) {
+                    	console.log(xhr, resp, text);
+                	}
+				})
+			})
+		})
+	</script>
+</head>
+
+<body>
+	<textarea id="codearea" rows="30" cols="80"></textarea>
+	<p>stdin</p>
+	<textarea id="inputarea" rows="10" cols="80"></textarea>
+	<button id="button">Try me</button>
+	<div>
+		<h5>stdout</h5>
+		<p id="paragraphOutput"></p>
+	</div>
+	<div>
+		<h5>stderr</h5>
+		<p id="paragraphStderr"></p>
+	</div>
+</body>
+<html>
