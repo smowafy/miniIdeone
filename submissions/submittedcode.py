@@ -1,1 +1,1 @@
-print(3 + 14)
+ans = raw_input("hey th

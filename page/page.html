@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="css/foundation.css">
+	<link rel="stylesheet" href="css/main.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 	<script>
 	var escapeChars = function(str) {
@@ -59,17 +63,28 @@
 </head>
 
 <body>
-	<textarea id="codearea" rows="30" cols="80"></textarea>
-	<p>stdin</p>
-	<textarea id="inputarea" rows="10" cols="80"></textarea>
-	<button id="button">Try me</button>
-	<div>
-		<h5>stdout</h5>
-		<p id="paragraphOutput"></p>
+	<nav>
+		<span>miniIdeOne</span>
+	</nav>
+	<div class="main-content">
+		<label>Your Code Goes here:</label>
+		<textarea id="codearea" rows="30" cols="80"></textarea>
+		<label>Stdin:</label>
+		<textarea id="inputarea" rows="10" cols="80"></textarea>
+		<button class="button" id="button">Try me!</button>
+		<div>
+			<label>Stdout:</label>
+			<p id="paragraphOutput">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			</p>
+		</div>
+		<div>
+			<label>Stderr:</label>
+			<p id="paragraphStderr">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			</p>
+		</div>
 	</div>
-	<div>
-		<h5>stderr</h5>
-		<p id="paragraphStderr"></p>
-	</div>
+	<footer>Sherif &copy; 2017</footer>
 </body>
 <html>
